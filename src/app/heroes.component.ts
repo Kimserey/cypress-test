@@ -7,11 +7,11 @@ import { Observable } from 'rxjs';
     <h1>
       Welcome to {{title}}!
     </h1>
-    <div *ngIf="heroes$ | async as heroes">
-      <div *ngFor="let hero of heroes">
+    <ul *ngIf="heroes$ | async as heroes">
+      <li *ngFor="let hero of heroes">
         <a [routerLink]="['/heroes', hero.id]">{{ hero.name }}</a>
-      </div>
-    </div>
+      </li>
+    </ul>
   `,
   styles: []
 })

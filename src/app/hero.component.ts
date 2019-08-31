@@ -5,10 +5,10 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   template: `
-    <h1 *ngIf="hero$ | async as hero">
+    <h1 id="superhero" *ngIf="hero$ | async as hero">
       Hero {{ hero.name }}!!
     </h1>
-    <button [routerLink]="['/heroes']">Back to list</button>
+    <button id="back-to-listing" [routerLink]="['/heroes']">Back to list</button>
   `
 })
 export class HeroComponent {
