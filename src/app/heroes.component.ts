@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
+import { HeroService } from './services/hero.service';
+import { Observable } from 'rxjs';
 
 @Component({
   template: `
     <h1>
       Welcome to {{title}}!
     </h1>
-    <div *ngFor="let hero of heroes">
-      <a [routerLink]="['/heroes', hero.id]">{{ hero.name }}</a>
+    <div *ngIf="heroes$ | async as heroes">
+      <div *ngFor="let hero of heroes">
+        <a [routerLink]="['/heroes', hero.id]">{{ hero.name }}</a>
+      </div>
     </div>
   `,
   styles: []
@@ -14,14 +18,9 @@ import { Component } from '@angular/core';
 export class HeroesComponent {
   title = 'Heroes page';
 
-  heroes = [
-    {
-      id: 1,
-      name: 'Superman'
-    },
-    {
-      id: 2,
-      name: 'Batman'
-    }
-  ];
+  heroes$: Observable<{ id: number, name: string }[]>;
+
+  constructor(service: HeroService) {
+    this.heroes$ = service.getHeroes();
+  }
 }
