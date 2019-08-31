@@ -6,9 +6,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes.component';
 import { HeroComponent } from './hero.component';
+import { AdminComponent } from './admin-component';
 
 @NgModule({
   declarations: [
+    AdminComponent,
     AppComponent,
     HeroesComponent,
     HeroComponent

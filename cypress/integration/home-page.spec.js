@@ -13,6 +13,8 @@ describe('Routing', () => {
   it('contains superhero title', () => {
     cy.visit('http://localhost:4200');
 
+    cy.login('admin');
+
     cy.get('li a')
       .first()
       .click();
