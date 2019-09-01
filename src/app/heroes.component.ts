@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Component({
   template: `
     <h1>
-      Welcome to {{title}}!
+      Welcome to Heroes!
     </h1>
     <ul *ngIf="heroes$ | async as heroes">
       <li *ngFor="let hero of heroes">
@@ -16,8 +16,6 @@ import { Observable } from 'rxjs';
   styles: []
 })
 export class HeroesComponent {
-  title = 'Heroes page';
-
   heroes$: Observable<{ id: number, name: string }[]>;
 
   constructor(service: HeroService) {
