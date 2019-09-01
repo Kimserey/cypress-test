@@ -24,12 +24,3 @@ Cypress.Commands.add("login", userType => {
       window.localStorage.setItem('user_type', userType);
     })
 });
-
-Cypress.Commands.add("serverWithRoutes", () => {
-  cy.server();
-
-  cy.fixture('heroes.json').then(heroes => {
-    cy.route('http://localhost:5000/heroes', heroes);
-    cy.route('http://localhost:5000/heroes/*', heroes[0]);
-  });
-});

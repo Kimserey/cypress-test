@@ -1,11 +1,17 @@
 /// <reference types="cypress" />
 
 describe('Global routing', () => {
+  beforeEach(() => {
+    cy.server();
+
+    cy.fixture('heroes.json').then(heroes => {
+      cy.route('http://localhost:5000/heroes', heroes);
+      cy.route('http://localhost:5000/heroes/*', heroes[0]);
+    });
+  })
 
   describe('Visit Landing', () => {
     it("should have a title containing 'Welcome'", () => {
-      cy.serverWithRoutes();
-
       cy.visit('/')
         .get('h1')
         .should('contain', 'Welcome');
@@ -14,8 +20,6 @@ describe('Global routing', () => {
 
   describe('Visit Heroes', () => {
     it("should have a title containing 'Welcome to Heroes'", () => {
-      cy.serverWithRoutes();
-
       cy.visit('/heroes')
         .get('h1')
         .should('contain', 'Welcome to Heroes');
@@ -24,8 +28,6 @@ describe('Global routing', () => {
 
   describe('Visit Heroes/1', () => {
     it("should have a title containing 'Superman'", () => {
-      cy.serverWithRoutes();
-
       cy.visit('/heroes/1')
         .get('h1')
         .should('contain', 'Superman');
@@ -33,10 +35,6 @@ describe('Global routing', () => {
   });
 
   describe('Visit Admin', () => {
-    before(() => {
-      cy.serverWithRoutes();
-    });
-
     it("should have a title containing 'Admin' when logged in as admin", () => {
       cy.login('admin');
 
