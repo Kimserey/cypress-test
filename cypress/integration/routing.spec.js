@@ -35,20 +35,25 @@ describe('Global routing', () => {
   });
 
   describe('Visit Admin', () => {
-    it("should have a title containing 'Admin' when logged in as admin", () => {
-      cy.login('admin');
 
-      cy.visit('/admin')
-        .get('h1')
-        .should('contain', 'Admin');
+    describe('Logged in as admin', () => {
+      it("should have a title containing 'Admin'", () => {
+        cy.login('admin');
+
+        cy.visit('/admin')
+          .get('h1')
+          .should('contain', 'Admin');
+      });
     });
 
-    it("should redirect to landing when logged in as user", () => {
-      cy.login('user');
+    describe('Logged in as user', () => {
+      it("should redirect to landing", () => {
+        cy.login('user');
 
-      cy.visit('/admin')
-        .url()
-        .should('eq', `${Cypress.config('baseUrl')}/heroes`);
+        cy.visit('/admin')
+          .url()
+          .should('eq', `${Cypress.config('baseUrl')}/heroes`);
+      });
     });
   });
 });
